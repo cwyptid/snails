@@ -29,3 +29,7 @@ textarea {
 	text-align: center;
 	font-family: myFont;
 }
+
+canvas {
+	border-radius: 50px;
+}

@@ -1,0 +1,31 @@
+@font-face {
+	font-family: myFont;
+	src: url(./DeterminationMonoWeb.ttf);
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background-image: url("./assets/bgthing.jpg");
+	background-repeat: repeat;
+	margin: 0;
+	display: flex;
+
+	/* This centers our sketch horizontally. */
+	justify-content: center;
+
+	/* This centers our sketch vertically. */
+	align-items: center;
+}
+input[type="text"],
+textarea {
+	background-color: rgb(20, 7, 36);
+	color: rgb(255, 253, 191);
+	border: 4px solid rgb(224, 160, 80);
+	border-radius: 15px;
+	text-align: center;
+	font-family: myFont;
+}

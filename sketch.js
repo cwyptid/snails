@@ -45,7 +45,7 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(500, 600);
+	createCanvas(500, 650);
 	textFont(myFont);
 	fill(255, 253, 191);
 	textSize(24);
@@ -134,7 +134,7 @@ function isTextBoxVisible() {
 
 function sceneDraw() {
 	scenes[0] = {
-		text: "Shell-om!\n\n[1] Shalom...?",
+		text: "Oh, hi.\n\n[1] Hello :)",
 		image: assets.smiling_waving,
 		keys: ["1"],
 		nextPages: [1],
@@ -142,200 +142,135 @@ function sceneDraw() {
 	};
 
 	scenes[1] = {
-		text: "Haha, nice to meet you.\nIf you're cool with it, could I get\na name for you?\n\n[1] Heck yeah.",
+		text: "Nice to meet you.\nCan I call you something?\n\n[1] Absolutely.\n\n[2] Uh...sure?",
 		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [53],
+		keys: ["1", "2"],
+		nextPages: [53, 53],
 		sound: song,
 	};
 
 	scenes[3] = {
-		text: "We snail people don't really use names \nmuch, but I'll try.\n\n[1] Snail people?\n\n[2] Wait, snails can talk?",
+		text: "Oh yeah...my name.\nI'm Slime Tony, the snail boy.\n\n[1] Snail boy?\n\n[2] Wait, snails talk?",
 		image: assets.furrowed_thinking,
 		keys: ["1", "2"],
-		nextPages: [4, 5],
+		nextPages: [4, 4],
 		sound: song,
 	};
 
 	scenes[4] = {
-		text: "Yeah, I'm a snail person!\nTo be honest, a lot of people\nthink I'm a slug person, though.\n\n[1] There are slug people too?",
+		text: "Yep, I'm a snail person.\nThough many mistake me for a slug.\n\n[1] Why is that? \n\n[2] How? You have a shell...",
 		image: assets.sad_normal,
-		keys: ["1"],
-		nextPages: [6],
-		sound: song,
-	};
-
-	scenes[5] = {
-		text: "Yup!\nBoth snail and slug people communicate\nthe same as you humans.\n\n[1] There are slug people too?",
-		image: assets.smiling_normal,
-		keys: ["1"],
-		nextPages: [6],
-		sound: song,
-	};
-
-	scenes[6] = {
-		text: "Heck yeah there are. What a wonderful\nworld we live in, right?\n\n[1] Are slugs and snails different?",
-		image: assets.smiling_normal,
-		keys: ["1"],
-		nextPages: [7],
+		keys: ["1", "2"],
+		nextPages: [7, 7],
 		sound: song,
 	};
 
 	scenes[7] = {
-		text: "Kind of...but not really?\nYou see, I was born a slug...but I'm\nactually a snail!\n\n[1] Wowie!",
+		text: "Well, I began my life as a slug, but\nnow I'm a snail.\n\n[1] Oh - neat.\n\n[2] Uh-huh...",
 		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [8],
+		keys: ["1", "2"],
+		nextPages: [8, 8],
 		sound: song,
 	};
 
 	scenes[8] = {
-		text: "...!\n\n[1] How does...that work?",
+		text: "...\n\n[1] How does that even work?\n\n[2] I'm a bit lost...",
 		image: assets.furrowed_normal,
-		keys: ["1"],
-		nextPages: [9],
+		keys: ["1", "2"],
+		nextPages: [9, 9],
 		sound: song,
 	};
 
 	scenes[9] = {
-		text: "Ahah, um...\nThat's a bit complicated!\n\n[1] Sorry!",
+		text: "It's a bit complicated, but I'll try\nto make it make sense.\n\n[1] No worries, take your time.\n\n[2] ...",
 		image: assets.sad_normal,
-		keys: ["1"],
-		nextPages: [10],
+		keys: ["1", "2"],
+		nextPages: [10, 10],
 		sound: song,
 	};
 
 	scenes[10] = {
-		text: "No no!\nI'm happy to explain, if you're willing\nto listen.\n\n[1] Sure thing, dude.",
+		text: "When I was growing up, everyone\nthought I was a slug.\n\n[1] So you were a slug?\n\n[2] What do you mean?",
 		image: assets.talking_waving,
-		keys: ["1"],
-		nextPages: [11],
+		keys: ["1", "2"],
+		nextPages: [11, 11],
 		sound: song,
 	};
 
 	scenes[11] = {
-		text: "Lets see...\n\n[1] (Keep listening...)",
-		image: assets.furrowed_thinking,
-		keys: ["1"],
-		nextPages: [12],
+		text: "On the outside, I was a slug.\nBut who I was on the outside didn't\nmatch who I was on the inside.\n\n[1] Oh, I see.\n\n[2] I think I'm catching on!",
+		image: assets.furrowed_normal,
+		keys: ["1", "2"],
+		nextPages: [12, 12],
 		sound: song,
 	};
 
 	scenes[12] = {
-		text: "I guess that when I was growing up,\neveryone including myself thought that\nI was a slug.\n\n[1] So you were a slug?",
-		image: assets.talking_thinking,
-		keys: ["1"],
-		nextPages: [13],
-		sound: song,
-	};
-
-	scenes[13] = {
-		text: "No, no.\nI was never a slug, it just...took me a\nwhile.\n\n[1] What do you mean?",
-		image: assets.furrowed_normal,
-		keys: ["1"],
-		nextPages: [14],
+		text: "It's a bit complicated, and I appreciate\nyour patience.\n\n[1] No problem, I'm here to listen.\n\n[2] Keep going, I'm interested.",
+		image: assets.sad_normal,
+		keys: ["1", "2"],
+		nextPages: [14, 14],
 		sound: song,
 	};
 
 	scenes[14] = {
-		text: "Sorry, I know this is complicated. You\nreally don't need to feel pressured to\ntry to understand me.\n\n[1] (Keep listening...)",
-		image: assets.sad_normal,
-		keys: ["1"],
-		nextPages: [15],
-		sound: song,
-	};
-
-	scenes[15] = {
-		text: "I just think...\nIt can be as simple as discovering\nthat you're something everybody thought\nthat you weren't.\n\n[1] (Keep listening...)",
+		text: "I just think it can be as simple as\ndiscovering that you're something\neveryone thought you weren't.\n\n[1] Yeah, life is full of surprises.\n\n[2] Everyone's journey is unique.",
 		image: assets.smiling_normal,
-		keys: ["1"],
-		nextPages: [16],
-		sound: song,
-	};
-
-	scenes[16] = {
-		text: "Maybe even back then, I thought I\nwasn't this way either.\n\n[1] Like...you were okay with it?",
-		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [17],
+		keys: ["1", "2"],
+		nextPages: [17, 17],
 		sound: song,
 	};
 
 	scenes[17] = {
-		text: "Not really...\n\n[1] (Keep listening...)",
-		image: assets.furrowed_normal,
-		keys: ["1"],
-		nextPages: [19],
+		text: "Right on. It's all about being true to\nyourself.\n\n[1] (Keep listening...)\n\n[2] True that.",
+		image: assets.smiling_normal,
+		keys: ["1", "2"],
+		nextPages: [20, 20],
 		sound: song,
 	};
 
-	scenes[19] = {
-		text: "I wasn't interested in the same things\nthat other slugs were.\n\n[1] (Keep listening...)",
-		image: assets.furrowed_normal,
-		keys: ["1"],
-		nextPages: [20],
-		sound: song,
-	};
-
-	// "I'm not like other girls" moment.
 	scenes[20] = {
-		text: "Wearing slug clothes, doing slug things!\nI hated that so much but...\n\n[1] (Keep listening...)",
-		image: assets.furrowed_normal,
-		keys: ["1"],
-		nextPages: [21],
+		text: "Slug clothes, slug activities... it just\nwasn't me.\n\n[1] Sounds frustrating.\n\n[2] I understand.",
+		image: assets.talking_normal,
+		keys: ["1", "2"],
+		nextPages: [21, 21],
 		sound: song,
 	};
 
 	scenes[21] = {
-		text: "But its deeper than that...\nMost importantly, I hated being seen as \na slug.\n\n[1] (Keep listening...)",
-		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [22],
-		sound: song,
-	};
-
-	scenes[22] = {
-		text: "You can be honest.\nIs this making any sense to you?\n\n[1] I think so.\n\n[2] You kind of lost me...",
-		image: assets.sad_normal,
-		keys: ["1", "2"],
-		nextPages: [24, 25],
-		sound: song,
-	};
-
-	scenes[24] = {
-		text: "Really...!\n\n[1] Yeah, I'm catching on!",
+		text: "Deeper than that, though... I hated\nbeing seen as a slug.\n\n[1] Must have been tough.\n\n[2] I'm sorry to hear that.",
 		image: assets.talking_waving,
-		keys: ["1"],
-		nextPages: [26],
+		keys: ["1", "2"],
+		nextPages: [23, 23],
 		sound: song,
 	};
 
-	scenes[25] = {
-		text: "That's all good, dude.\n\nSeriously, thanks for bearing with me\nanyways.\n\n[1] No problemo.",
-		image: assets.smiling_normal,
-		keys: ["1"],
-		nextPages: [26],
+	scenes[23] = {
+		text: "You get it. It's about finding your\nplace.\n\n[1] You've got this!\n\n[2] I believe in you.",
+		image: assets.talking_waving,
+		keys: ["1", "2"],
+		nextPages: [26, 26],
 		sound: song,
 	};
 
 	scenes[26] = {
-		text: "Thanks so much, really!\nYou're a good listener.\n\n[1] About your shell...",
+		text: "You're an awesome listener.\n\n[1] About your shell...\n\n[2] Your shell?",
 		image: assets.smiling_normal,
-		keys: ["1"],
-		nextPages: [27],
+		keys: ["1", "2"],
+		nextPages: [27, 27],
 		sound: song,
 	};
 
 	scenes[27] = {
-		text: "Huh...?\n\n[1] You weren't born with it...?",
+		text: "Huh...?\n\n[1] You weren't born with it...?\n\n[2] Slugs aren't born with shells,\nright?",
 		image: assets.sad_normal,
-		keys: ["1"],
-		nextPages: [28],
+		keys: ["1", "2"],
+		nextPages: [28, 28],
 		sound: song,
 	};
 
 	scenes[28] = {
-		text: "Oh!!\nYeah. Definitely not.\n\n[1] (Keep listening...)",
+		text: "Oh, absolutely not.\n\n[1] (Keep listening...)",
 		image: assets.furrowed_thinking,
 		keys: ["1"],
 		nextPages: [29],
@@ -343,128 +278,63 @@ function sceneDraw() {
 	};
 
 	scenes[29] = {
-		text: "But just because I wasn't born\nwith this shell doesn't make it any\nless mine.\n\nYou know?\n\n[1] I know.",
-		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [30],
+		text: "Yeah, wasn't born with this shell,\nbut it's mine, you know?\n\n[1] That's cool!\n\n[2] Right on, dude.",
+		image: assets.furrowed_thinking,
+		keys: ["1", "2"],
+		nextPages: [30, 30],
 		sound: song,
 	};
 
 	scenes[30] = {
-		text: "Haha...\nYeah, you know.\n\n[1] Does it make it easier?",
+		text: "It's all about making it yours.\n\n[1] Why the change, though?\n\n[2] Do you think you needed a shell?",
 		image: assets.smiling_normal,
-		keys: ["1"],
-		nextPages: [31],
-		sound: song,
-	};
-
-	scenes[31] = {
-		text: "YES. Dude.\nSo much easier.\n\n[1] (Keep listening...)",
-		image: assets.talking_waving,
-		keys: ["1"],
-		nextPages: [32],
+		keys: ["1", "2"],
+		nextPages: [32, 32],
 		sound: song,
 	};
 
 	scenes[32] = {
-		text: "This whole thing...\nIt's so much more than me WANTING a\nshell!\n\n[1] (Keep listening...)",
-		image: assets.furrowed_normal,
+		text: "This whole shell thing... It's more than\njust wanting it.\n\n[1] (Keep listening...)",
+		image: assets.talking_normal,
 		keys: ["1"],
 		nextPages: [33],
 		sound: song,
 	};
 
 	scenes[33] = {
-		text: "I never necessarily wanted a shell...\nBut...\nPeople calling me a snail...\n\n[1] (Keep listening...)",
-		image: assets.furrowed_normal,
+		text: "It's about making decisions. Decisions\nthat made me more comfortable in my\nskin.\n\n[1] (Keep listening...)",
+		image: assets.talking_normal,
 		keys: ["1"],
 		nextPages: [34],
 		sound: song,
 	};
 
 	scenes[34] = {
-		text: "If I didn't look the part...\n\n[1] (Keep listening...)",
-		image: assets.talking_waving,
-		keys: ["1"],
-		nextPages: [35],
-		sound: song,
-	};
-
-	scenes[35] = {
-		text: "It makes me feel...\n\n[1] (Keep listening...)",
-		image: assets.sad_normal,
-		keys: ["1"],
-		nextPages: [36],
-		sound: song,
-	};
-
-	// Gender dysphoria moment.
-	scenes[36] = {
-		text: "Wrong...\n\n[1] (Keep listening...)",
-		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [37],
-		sound: song,
-	};
-
-	scenes[37] = {
-		text: "Don't get me wrong.\nThis is who I am.\n\n[1] (Keep listening...)",
-		image: assets.talking_waving,
-		keys: ["1"],
-		nextPages: [38],
-		sound: song,
-	};
-
-	scenes[38] = {
-		text: "I just wish I didn't have to make the\ncut to be given the treatment I deserve.\n\n[1] Would it help if people asked?",
-		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [39],
-		sound: song,
-	};
-
-	scenes[39] = {
-		text: "What?\n\n[1] Like, if they're unsure!",
-		image: assets.talking_waving,
-		keys: ["1"],
-		nextPages: [40],
-		sound: song,
-	};
-
-	scenes[40] = {
-		text: "Honestly...\nNot really.\n\n[1] How so?",
-		image: assets.sad_normal,
-		keys: ["1"],
-		nextPages: [41],
-		sound: song,
-	};
-
-	scenes[41] = {
-		text: "I think I would just feel singled out.\nAlmost as if they could tell, you know!\n\n[1] (Keep listening...)",
-		image: assets.talking_normal,
+		text: "That made me...me.\n\n[1] (Keep listening...)",
+		image: assets.furrowed_normal,
 		keys: ["1"],
 		nextPages: [42],
 		sound: song,
 	};
 
 	scenes[42] = {
-		text: "And, and sometimes when I look at\nmyself...\n\n[1] (Keep listening...)",
-		image: assets.furrowed_normal,
+		text: "But sometimes when I look at myself...\n\n[1] (Keep listening...)",
+		image: assets.sad_normal,
 		keys: ["1"],
 		nextPages: [43],
 		sound: song,
 	};
 
 	scenes[43] = {
-		text: "I see...\n\nA slug with a snail shell.\n\n[1] It's not like that.",
+		text: "I see... a slug with a snail shell.\n\n[1] It's not like that.\n\n[2] Don't beat yourself up.",
 		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [44],
+		keys: ["1", "2"],
+		nextPages: [44, 44],
 		sound: song,
 	};
 
 	scenes[44] = {
-		text: "Yeah.\n\n[1] (Keep listening...)",
+		text: "You're right...\n\n[1] (Keep listening...)",
 		image: assets.sad_normal,
 		keys: ["1"],
 		nextPages: [45],
@@ -472,67 +342,54 @@ function sceneDraw() {
 	};
 
 	scenes[45] = {
-		text: "You're right...\n\n[1] (Keep listening...)",
+		text: "Thank you.\n\n[1] Don't mention it.\n\n[2] Happy to help.",
 		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [46],
+		keys: ["1", "2"],
+		nextPages: [46, 46],
 		sound: song,
 	};
 
 	scenes[46] = {
-		text: "Thanks for snapping me out of that.\n\n[1] Don't mention it.",
-		image: assets.smiling_normal,
-		keys: ["1"],
-		nextPages: [47],
-		sound: song,
-	};
-
-	scenes[47] = {
-		text: "Hey.\nEven if you don't understand me, you\nobviously have grown to respect my \nsituation.\n\n[1] (Keep listening...)",
+		text:
+			"Hey " +
+			newName +
+			", even if you don't fully\nget me, you respect my situation.\n\n[1] I sure do!\n\n[2] It's the least I could do.",
 		image: assets.smiling_waving,
-		keys: ["1"],
-		nextPages: [48],
+		keys: ["1", "2"],
+		nextPages: [48, 48],
 		sound: song,
 	};
 
 	scenes[48] = {
-		text: "I think...\nThat's all people need to do.\n\n[1] Right on!",
-		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [49],
-		sound: song,
-	};
-
-	scenes[49] = {
 		text: "Yeah...\n\n[1] (Keep listening...)",
-		image: assets.smiling_normal,
+		image: assets.furrowed_normal,
 		keys: ["1"],
 		nextPages: [50],
 		sound: song,
 	};
 
 	scenes[50] = {
-		text: "Oh!\nLook at the time! I should probably get\ngoing.\n\n[1] Oh, really?",
+		text: "Oh.\nLook at the time. I should probably get\ngoing.\n\n[1] Oh, really?\n\n[2] Woops.",
 		image: assets.talking_waving,
-		keys: ["1"],
-		nextPages: [51],
+		keys: ["1", "2"],
+		nextPages: [51, 51],
 		sound: song,
 	};
 
 	scenes[51] = {
-		text: "Yeah, sorry...\nSnails got snail things to do.\n\n[1] Fair enough!",
+		text: "Yeah, sorry...\nSnails got snail things to do.\n\n[1] Fair enough!\n\n[2] Rock on, dude.",
 		image: assets.talking_normal,
-		keys: ["1"],
-		nextPages: [52],
+		keys: ["1", "2"],
+		nextPages: [52, 52],
 		sound: song,
 	};
 
 	// Bill and Ted moment lol.
 	scenes[52] = {
 		text:
-			"Haha!\nCarry on, " +
+			"Carry on, " +
 			newName +
-			"!\n\nAnd be excellent to everyone!\n\n[1] (Return to title)",
+			"!\n\nAnd be excellent to everyone.\n\n[1] (Return to title)",
 		image: assets.smiling_waving,
 		keys: ["1"],
 		nextPages: [18],
@@ -548,7 +405,7 @@ function sceneDraw() {
 	};
 
 	scenes[53] = {
-		text: "Awesome, lay it on me!\n\n(Hit ENTER, and then [1] to submit your\nname.)",
+		text: "Awesome, let's hear it.\n\n(Hit ENTER, and then [1] to submit your\nname.)",
 		image: assets.smiling_normal,
 		keys: ["1"],
 		nextPages: [54],
@@ -556,7 +413,7 @@ function sceneDraw() {
 	};
 
 	scenes[54] = {
-		text: newName + "...\n\nHow cool!\n\n[1] (Keep listening...)",
+		text: newName + "...\n\nCool.\n\n[1] (Keep listening...)",
 		image: assets.smiling_normal,
 		keys: ["1"],
 		nextPages: [3],

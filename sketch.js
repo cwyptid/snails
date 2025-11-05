@@ -8,6 +8,10 @@ let newName;
 // currentScene is set to 18 because scene 18 is the title screen
 let currentScene = 18;
 
+// Button variables for mobile/web support
+let buttons = [];
+let nameInputSubmitted = false;
+
 function preload() {
 	// Preloading all my assets
 
@@ -45,7 +49,18 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(500, 650);
+	// Responsive canvas sizing - scale on mobile, fixed on desktop
+	let canvasWidth = 500;
+	let canvasHeight = 650;
+
+	if (windowWidth < 600) {
+		// Mobile: scale to fit viewport with padding
+		const scale = (windowWidth - 20) / 500;
+		canvasWidth = windowWidth - 20;
+		canvasHeight = 650 * scale;
+	}
+
+	createCanvas(canvasWidth, canvasHeight);
 	textFont(myFont);
 	fill(255, 253, 191);
 	textSize(24);
@@ -56,6 +71,7 @@ function setup() {
 	inp.position(CENTER);
 	inp.size(125, 25);
 	inp.style("font-size", "24px");
+	inp.style("text-align", "center");
 	inp.input(myInputEvent);
 }
 
@@ -65,25 +81,37 @@ function draw() {
 	isSketchActive();
 	isMusicPlaying();
 	isTextBoxVisible();
+	drawButtons();
 }
 
 function keyPressed() {
-	// Sound for when player switches between scenes.
-	if (key == scenes[currentScene].keys[0]) {
-		currentScene = scenes[currentScene].nextPages[0];
-		forward.play();
-	}
-	if (key == scenes[currentScene].keys[1]) {
-		currentScene = scenes[currentScene].nextPages[1];
-		forward.play();
+	// Handle name input submission on Enter
+	if (currentScene === 53 && keyCode === ENTER) {
+		if (newName && newName.trim() !== "") {
+			nameInputSubmitted = true;
+			inp.hide();
+			backward.play();
+			currentScene = scenes[currentScene].nextPages[0];
+			return false; // Prevent default behavior
+		}
 	}
 
-	// Sound for when player enters their name. Hides the input box afterwards and logs the name to the console.
-	if (keyCode === ENTER) {
-		console.log(inp);
-		console.log(newName);
-		inp.hide();
-		backward.play();
+	// Sound for when player switches between scenes (keyboard support)
+	if (currentScene !== 53 && scenes[currentScene].keys) {
+		if (key == scenes[currentScene].keys[0]) {
+			currentScene = scenes[currentScene].nextPages[0];
+			forward.play();
+		}
+		if (key == scenes[currentScene].keys[1]) {
+			currentScene = scenes[currentScene].nextPages[1];
+			forward.play();
+		}
+	}
+
+	// Handle title screen - start game with any key
+	if (currentScene === 18 && key == "1") {
+		currentScene = scenes[currentScene].nextPages[0];
+		forward.play();
 	}
 }
 
@@ -100,8 +128,12 @@ function isSketchActive() {
 		rect(250, 500, 500, 250, 20);
 		pop();
 
-		text(scenes[currentScene].text, 10, 405);
-	} else if (currentScene != 53) {
+		// Draw text WITH the [1] and [2] markers so players see the numbers
+		fill(255, 253, 191);
+		textSize(20);
+		textAlign(LEFT);
+		text(scenes[currentScene].text, 20, 420);
+	} else if (currentScene == 18) {
 		push();
 		background(bg);
 		image(scenes[currentScene].image, 0, 30, 500, 500);
@@ -129,6 +161,119 @@ function isTextBoxVisible() {
 		inp.hide();
 	} else {
 		inp.show();
+		// Focus on input for better UX
+		inp.elt.focus();
+	}
+}
+
+function drawButtons() {
+	// Create numbered buttons at bottom of text box
+	buttons = [];
+
+	// Don't show buttons during name input or on title screen
+	if (currentScene === 53 || currentScene === 18) {
+		return;
+	}
+
+	if (!scenes[currentScene] || !scenes[currentScene].text) {
+		return;
+	}
+
+	const numChoices = scenes[currentScene].keys ? scenes[currentScene].keys.length : 0;
+	const buttonRadius = 18;
+	const buttonGap = 50;
+	const startX = 250 - (numChoices > 1 ? buttonGap / 2 : 0); // Center based on number of choices
+	const buttonY = 595; // Bottom of text box
+
+	for (let i = 0; i < numChoices; i++) {
+		const x = startX + i * buttonGap;
+		const pixelSize = 4; // Size of each pixel
+		const button = {
+			x: x,
+			y: buttonY,
+			r: buttonRadius,
+			pixelSize: pixelSize,
+			index: i,
+			key: scenes[currentScene].keys[i],
+			isHovered: false,
+		};
+
+		// Check if mouse is over button (circular hit detection)
+		const distance = dist(mouseX, mouseY, button.x, button.y);
+		if (distance < button.r + 2) {
+			button.isHovered = true;
+		}
+
+		buttons.push(button);
+
+		// Draw pixelated circle button (chiptune style)
+		push();
+
+		// Button color
+		if (button.isHovered) {
+			fill(255, 215, 100);
+			cursor(HAND);
+		} else {
+			fill(255, 235, 150);
+		}
+		noStroke();
+		rectMode(CENTER);
+
+		// Draw pixelated circle using small squares
+		for (let px = -button.r; px <= button.r; px += button.pixelSize) {
+			for (let py = -button.r; py <= button.r; py += button.pixelSize) {
+				if (dist(0, 0, px, py) < button.r) {
+					rect(button.x + px, button.y + py, button.pixelSize, button.pixelSize);
+				}
+			}
+		}
+
+		// Draw the number
+		fill(20, 7, 36);
+		textAlign(CENTER, CENTER);
+		textSize(26);
+		textStyle(BOLD);
+		text(button.key, button.x, button.y - 2);
+
+		pop();
+	}
+}
+
+function removeChoiceMarkers(fullText) {
+	// Remove [1], [2], etc. markers but keep the choice text
+	return fullText
+		.replace(/\[\d+\]\s*/g, "")
+		.trim();
+}
+
+function extractChoiceText(fullText, choiceIndex) {
+	// Extract the choice text from the scene text
+	const choices = fullText.split("\n").filter((line) => line.includes("["));
+	if (choiceIndex < choices.length) {
+		const choice = choices[choiceIndex];
+		// Remove the [1] or [2] prefix and return just the text
+		return choice.replace(/\[\d+\]\s*/, "").trim();
+	}
+	return "";
+}
+
+function mousePressed() {
+	// Handle title screen click - start game
+	if (currentScene === 18) {
+		// Click anywhere on title screen to start
+		currentScene = scenes[currentScene].nextPages[0];
+		forward.play();
+		return false;
+	}
+
+	// Handle pixelated button clicks
+	for (let button of buttons) {
+		const distance = dist(mouseX, mouseY, button.x, button.y);
+		if (distance < button.r + 2) {
+			currentScene = scenes[currentScene].nextPages[button.index];
+			forward.play();
+			return false; // Prevent default behavior
+		}
 	}
 }
 
@@ -405,7 +550,7 @@ function sceneDraw() {
 	};
 
 	scenes[53] = {
-		text: "Awesome, let's hear it.\n\n(Hit ENTER, and then [1] to submit your\nname.)",
+		text: "Awesome, let's hear it.\n\n(Type your name and hit ENTER)",
 		image: assets.smiling_normal,
 		keys: ["1"],
 		nextPages: [54],

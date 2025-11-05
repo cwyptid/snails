@@ -150,7 +150,7 @@ function sceneDraw() {
 	};
 
 	scenes[3] = {
-		text: "Oh yeah...my name.\nI'm Slime Tony, the snail boy.\n\n[1] Snail boy?\n\n[2] Wait, snails talk?",
+		text: "Oh yeah...my name.\nI'm Slime Tony, the snail girl.\n\n[1] Snail girl?\n\n[2] Wait, snails talk?",
 		image: assets.furrowed_thinking,
 		keys: ["1", "2"],
 		nextPages: [4, 4],

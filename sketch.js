@@ -1,3 +1,14 @@
+// Customize the p5.js loading screen
+(function() {
+	const checkLoading = setInterval(function() {
+		const loadingScreen = document.getElementById('p5_loading');
+		if (loadingScreen) {
+			loadingScreen.innerHTML = '✨ Loading your adventure... 🐌 ✨';
+			clearInterval(checkLoading);
+		}
+	}, 10);
+})();
+
 // Defining variables and arrays
 let assets = [];
 let scenes = [];

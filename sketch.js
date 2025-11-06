@@ -1,9 +1,13 @@
-// Customize the p5.js loading screen
+// Customize the p5.js loading screen with wavy text
 (function() {
 	const checkLoading = setInterval(function() {
 		const loadingScreen = document.getElementById('p5_loading');
 		if (loadingScreen) {
-			loadingScreen.innerHTML = '✨ Loading your adventure... 🐌 ✨';
+			const text = '✨ Loading your adventure... 🐌 ✨';
+			// Wrap each character in a span for individual wave animation
+			loadingScreen.innerHTML = text.split('').map(char =>
+				`<span>${char === ' ' ? '&nbsp;' : char}</span>`
+			).join('');
 			clearInterval(checkLoading);
 		}
 	}, 10);

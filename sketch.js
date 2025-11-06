@@ -96,6 +96,18 @@ function keyPressed() {
 	// Enable audio on mobile (required for browser autoplay policies)
 	userStartAudio();
 
+	// Handle title screen - start game with key "1" (must come before general handler)
+	if (currentScene === 18 && key == "1") {
+		newName = ""; // Reset name for new game
+		// Start background music on mobile before changing scenes
+		if (!song.isPlaying()) {
+			song.play();
+		}
+		currentScene = 0; // Always go to scene 0 to start the game
+		forward.play();
+		return false;
+	}
+
 	// Handle name input submission on Enter
 	if (currentScene === 53 && keyCode === ENTER) {
 		if (newName && newName.trim() !== "") {
@@ -119,17 +131,6 @@ function keyPressed() {
 			forward.play();
 			return false; // Prevent same keypress from being processed again
 		}
-	}
-
-	// Handle title screen - start game with key "1"
-	if (currentScene === 18 && key == "1") {
-		newName = ""; // Reset name for new game
-		// Start background music on mobile before changing scenes
-		if (!song.isPlaying()) {
-			song.play();
-		}
-		currentScene = 0; // Always go to scene 0 to start the game
-		forward.play();
 	}
 }
 

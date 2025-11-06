@@ -50,10 +50,10 @@ function preload() {
 	forward = loadSound("./Backwards.mp3");
 	backward = loadSound("./Forward.mp3");
 
-	// Set all audio to quarter volume
-	song.setVolume(0.25);
-	forward.setVolume(0.25);
-	backward.setVolume(0.25);
+	// Set all audio to very low volume (10%)
+	song.setVolume(0.1);
+	forward.setVolume(0.1);
+	backward.setVolume(0.1);
 }
 
 function setup() {
@@ -124,6 +124,10 @@ function keyPressed() {
 	// Handle title screen - start game with key "1"
 	if (currentScene === 18 && key == "1") {
 		newName = ""; // Reset name for new game
+		// Start background music on mobile before changing scenes
+		if (!song.isPlaying()) {
+			song.play();
+		}
 		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 	}
@@ -279,6 +283,10 @@ function mousePressed() {
 	if (currentScene === 18) {
 		// Click anywhere on title screen to start
 		newName = ""; // Reset name for new game
+		// Start background music on mobile before changing scenes
+		if (!song.isPlaying()) {
+			song.play();
+		}
 		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 		return false;

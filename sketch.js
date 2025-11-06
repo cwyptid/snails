@@ -49,6 +49,11 @@ function preload() {
 	// Sounds by noahkuehne on itch.io (Safe to use with credit.)
 	forward = loadSound("./Backwards.mp3");
 	backward = loadSound("./Forward.mp3");
+
+	// Set all audio to quarter volume
+	song.setVolume(0.25);
+	forward.setVolume(0.25);
+	backward.setVolume(0.25);
 }
 
 function setup() {
@@ -88,6 +93,9 @@ function draw() {
 }
 
 function keyPressed() {
+	// Enable audio on mobile (required for browser autoplay policies)
+	userStartAudio();
+
 	// Handle name input submission on Enter
 	if (currentScene === 53 && keyCode === ENTER) {
 		if (newName && newName.trim() !== "") {
@@ -264,6 +272,9 @@ function extractChoiceText(fullText, choiceIndex) {
 }
 
 function mousePressed() {
+	// Enable audio on mobile (required for browser autoplay policies)
+	userStartAudio();
+
 	// Handle title screen click - start game
 	if (currentScene === 18) {
 		// Click anywhere on title screen to start

@@ -51,17 +51,18 @@ canvas {
 	z-index: 9999 !important;
 	margin: 0 !important;
 	padding: 0 !important;
-	animation: pulse 1.5s ease-in-out infinite;
+	animation: wave 2s ease-in-out infinite;
 }
 
-/* Cute pulsing animation for the loading text */
-@keyframes pulse {
+/* Cute waving animation for the loading text */
+@keyframes wave {
 	0%, 100% {
-		opacity: 1;
-		transform: scale(1);
+		transform: rotate(0deg);
 	}
-	50% {
-		opacity: 0.7;
-		transform: scale(1.05);
+	25% {
+		transform: rotate(-3deg);
+	}
+	75% {
+		transform: rotate(3deg);
 	}
 }

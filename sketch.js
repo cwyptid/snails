@@ -12,6 +12,9 @@ let currentScene = 18;
 let buttons = [];
 let nameInputSubmitted = false;
 
+// Scale factor for responsive design
+let canvasScale = 1;
+
 function preload() {
 	// Preloading all my assets
 
@@ -55,9 +58,9 @@ function setup() {
 
 	if (windowWidth < 600) {
 		// Mobile: scale to fit viewport with padding
-		const scale = (windowWidth - 20) / 500;
+		canvasScale = (windowWidth - 20) / 500;
 		canvasWidth = windowWidth - 20;
-		canvasHeight = 650 * scale;
+		canvasHeight = 650 * canvasScale;
 	}
 
 	createCanvas(canvasWidth, canvasHeight);
@@ -108,9 +111,10 @@ function keyPressed() {
 		}
 	}
 
-	// Handle title screen - start game with any key
+	// Handle title screen - start game with key "1"
 	if (currentScene === 18 && key == "1") {
-		currentScene = scenes[currentScene].nextPages[0];
+		newName = ""; // Reset name for new game
+		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 	}
 }
@@ -119,26 +123,26 @@ function isSketchActive() {
 	// If it isn't the title screen...then don't display the title screen. If it is...display the title screen and have no text box.
 	if (currentScene != 18) {
 		background(bg);
-		image(scenes[currentScene].image, 100, 30, 330, 411.5);
+		image(scenes[currentScene].image, 100 * canvasScale, 30 * canvasScale, 330 * canvasScale, 411.5 * canvasScale);
 
 		push();
-		strokeWeight(8);
+		strokeWeight(8 * canvasScale);
 		stroke(224, 160, 80);
 		fill(20, 7, 36);
-		rect(250, 500, 500, 250, 20);
+		rect(250 * canvasScale, 500 * canvasScale, 500 * canvasScale, 250 * canvasScale, 20 * canvasScale);
 		pop();
 
 		// Draw text WITH the [1] and [2] markers so players see the numbers
 		fill(255, 253, 191);
-		textSize(20);
+		textSize(20 * canvasScale);
 		textAlign(LEFT);
-		text(scenes[currentScene].text, 20, 420);
+		text(scenes[currentScene].text, 20 * canvasScale, 420 * canvasScale);
 	} else if (currentScene == 18) {
 		push();
 		background(bg);
-		image(scenes[currentScene].image, 0, 30, 500, 500);
+		image(scenes[currentScene].image, 0, 30 * canvasScale, 500 * canvasScale, 500 * canvasScale);
 		fill(0);
-		text(scenes[currentScene].text, 150, 525);
+		text(scenes[currentScene].text, 150 * canvasScale, 525 * canvasScale);
 		pop();
 	}
 }
@@ -180,14 +184,14 @@ function drawButtons() {
 	}
 
 	const numChoices = scenes[currentScene].keys ? scenes[currentScene].keys.length : 0;
-	const buttonRadius = 18;
-	const buttonGap = 50;
-	const startX = 250 - (numChoices > 1 ? buttonGap / 2 : 0); // Center based on number of choices
-	const buttonY = 595; // Bottom of text box
+	const buttonRadius = 18 * canvasScale;
+	const buttonGap = 50 * canvasScale;
+	const startX = (250 - (numChoices > 1 ? buttonGap / 2 : 0)) * canvasScale; // Center based on number of choices
+	const buttonY = 595 * canvasScale; // Bottom of text box
 
 	for (let i = 0; i < numChoices; i++) {
 		const x = startX + i * buttonGap;
-		const pixelSize = 4; // Size of each pixel
+		const pixelSize = 4 * canvasScale; // Size of each pixel
 		const button = {
 			x: x,
 			y: buttonY,
@@ -200,7 +204,7 @@ function drawButtons() {
 
 		// Check if mouse is over button (circular hit detection)
 		const distance = dist(mouseX, mouseY, button.x, button.y);
-		if (distance < button.r + 2) {
+		if (distance < button.r + 2 * canvasScale) {
 			button.isHovered = true;
 		}
 
@@ -231,9 +235,9 @@ function drawButtons() {
 		// Draw the number
 		fill(20, 7, 36);
 		textAlign(CENTER, CENTER);
-		textSize(26);
+		textSize(26 * canvasScale);
 		textStyle(BOLD);
-		text(button.key, button.x, button.y - 2);
+		text(button.key, button.x, button.y - 2 * canvasScale);
 
 		pop();
 	}
@@ -261,7 +265,8 @@ function mousePressed() {
 	// Handle title screen click - start game
 	if (currentScene === 18) {
 		// Click anywhere on title screen to start
-		currentScene = scenes[currentScene].nextPages[0];
+		newName = ""; // Reset name for new game
+		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 		return false;
 	}
@@ -269,7 +274,7 @@ function mousePressed() {
 	// Handle pixelated button clicks
 	for (let button of buttons) {
 		const distance = dist(mouseX, mouseY, button.x, button.y);
-		if (distance < button.r + 2) {
+		if (distance < button.r + 2 * canvasScale) {
 			currentScene = scenes[currentScene].nextPages[button.index];
 			forward.play();
 			return false; // Prevent default behavior
@@ -545,7 +550,7 @@ function sceneDraw() {
 		text: "",
 		image: assets.titlescreen,
 		keys: ["1"],
-		nextPages: [0],
+		nextPages: [18], // Stay on title screen
 		sound: song,
 	};
 

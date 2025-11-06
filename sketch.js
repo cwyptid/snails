@@ -5,7 +5,8 @@
 		if (loadingScreen) {
 			const text = '✨ Loading your adventure... 🐌 ✨';
 			// Wrap each character in a span for individual wave animation
-			loadingScreen.innerHTML = text.split('').map(char =>
+			// Use spread operator to properly handle emojis (they're multi-byte)
+			loadingScreen.innerHTML = [...text].map(char =>
 				`<span>${char === ' ' ? '&nbsp;' : char}</span>`
 			).join('');
 			clearInterval(checkLoading);

@@ -53,7 +53,7 @@ function preload() {
 
 	assets.talking_thinking = loadImage("./assets/talking_thinking.gif");
 
-	assets.titlescreen = loadImage("./assets/titlescreen.gif");
+	assets.titlescreen = loadImage("./assets/titlescreenv2.gif");
 
 	assets.noImage = loadImage("./assets/noImage.jpg");
 

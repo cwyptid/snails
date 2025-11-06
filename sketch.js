@@ -49,6 +49,11 @@ function preload() {
 	// Sounds by noahkuehne on itch.io (Safe to use with credit.)
 	forward = loadSound("./Backwards.mp3");
 	backward = loadSound("./Forward.mp3");
+
+	// Set all audio to half volume
+	song.setVolume(0.5);
+	forward.setVolume(0.5);
+	backward.setVolume(0.5);
 }
 
 function setup() {

@@ -121,8 +121,8 @@ function keyPressed() {
 	// Enable audio on mobile (required for browser autoplay policies)
 	userStartAudio();
 
-	// Handle title screen - start game with key "1" (must come before general handler)
-	if (currentScene === 18 && key == "1") {
+	// Handle title screen - start game with any key (must come before general handler)
+	if (currentScene === 18) {
 		newName = ""; // Reset name for new game
 		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();

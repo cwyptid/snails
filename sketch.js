@@ -104,10 +104,12 @@ function keyPressed() {
 		if (key == scenes[currentScene].keys[0]) {
 			currentScene = scenes[currentScene].nextPages[0];
 			forward.play();
+			return false; // Prevent same keypress from being processed again
 		}
 		if (key == scenes[currentScene].keys[1]) {
 			currentScene = scenes[currentScene].nextPages[1];
 			forward.play();
+			return false; // Prevent same keypress from being processed again
 		}
 	}
 

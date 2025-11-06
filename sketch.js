@@ -24,6 +24,9 @@ let newName;
 // currentScene is set to 18 because scene 18 is the title screen
 let currentScene = 18;
 
+// Track if music has been started
+let musicStarted = false;
+
 // Button variables for mobile/web support
 let buttons = [];
 let nameInputSubmitted = false;
@@ -106,16 +109,17 @@ function draw() {
 	isMusicPlaying();
 	isTextBoxVisible();
 	drawButtons();
+
+	// Auto-start music on page load (will work after first user interaction due to browser policies)
+	if (!musicStarted && !song.isPlaying()) {
+		song.loop();
+		musicStarted = true;
+	}
 }
 
 function keyPressed() {
 	// Enable audio on mobile (required for browser autoplay policies)
 	userStartAudio();
-
-	// Start music on title screen after first interaction
-	if (currentScene === 18 && !song.isPlaying()) {
-		song.play();
-	}
 
 	// Handle title screen - start game with key "1" (must come before general handler)
 	if (currentScene === 18 && key == "1") {
@@ -296,11 +300,6 @@ function extractChoiceText(fullText, choiceIndex) {
 function mousePressed() {
 	// Enable audio on mobile (required for browser autoplay policies)
 	userStartAudio();
-
-	// Start music on title screen after first interaction
-	if (currentScene === 18 && !song.isPlaying()) {
-		song.play();
-	}
 
 	// Handle title screen click - start game
 	if (currentScene === 18) {

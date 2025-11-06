@@ -24,6 +24,9 @@ let newName;
 // currentScene is set to 18 because scene 18 is the title screen
 let currentScene = 18;
 
+// Track if music has been started
+let musicStarted = false;
+
 // Button variables for mobile/web support
 let buttons = [];
 let nameInputSubmitted = false;
@@ -66,10 +69,10 @@ function preload() {
 	forward = loadSound("./Backwards.mp3");
 	backward = loadSound("./Forward.mp3");
 
-	// Set all audio to very low volume (10%)
-	song.setVolume(0.1);
-	forward.setVolume(0.1);
-	backward.setVolume(0.1);
+	// Set all audio to very low volume (2%)
+	song.setVolume(0.02);
+	forward.setVolume(0.02);
+	backward.setVolume(0.02);
 }
 
 function setup() {
@@ -106,6 +109,12 @@ function draw() {
 	isMusicPlaying();
 	isTextBoxVisible();
 	drawButtons();
+
+	// Auto-start music on page load (will work after first user interaction due to browser policies)
+	if (!musicStarted && !song.isPlaying()) {
+		song.loop();
+		musicStarted = true;
+	}
 }
 
 function keyPressed() {
@@ -115,10 +124,6 @@ function keyPressed() {
 	// Handle title screen - start game with key "1" (must come before general handler)
 	if (currentScene === 18 && key == "1") {
 		newName = ""; // Reset name for new game
-		// Start background music on mobile before changing scenes
-		if (!song.isPlaying()) {
-			song.play();
-		}
 		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 		return false;
@@ -300,10 +305,6 @@ function mousePressed() {
 	if (currentScene === 18) {
 		// Click anywhere on title screen to start
 		newName = ""; // Reset name for new game
-		// Start background music on mobile before changing scenes
-		if (!song.isPlaying()) {
-			song.play();
-		}
 		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 		return false;

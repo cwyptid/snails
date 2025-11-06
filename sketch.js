@@ -66,10 +66,10 @@ function preload() {
 	forward = loadSound("./Backwards.mp3");
 	backward = loadSound("./Forward.mp3");
 
-	// Set all audio to very low volume (5%)
-	song.setVolume(0.05);
-	forward.setVolume(0.05);
-	backward.setVolume(0.05);
+	// Set all audio to very low volume (2%)
+	song.setVolume(0.02);
+	forward.setVolume(0.02);
+	backward.setVolume(0.02);
 }
 
 function setup() {
@@ -112,13 +112,14 @@ function keyPressed() {
 	// Enable audio on mobile (required for browser autoplay policies)
 	userStartAudio();
 
+	// Start music on title screen after first interaction
+	if (currentScene === 18 && !song.isPlaying()) {
+		song.play();
+	}
+
 	// Handle title screen - start game with key "1" (must come before general handler)
 	if (currentScene === 18 && key == "1") {
 		newName = ""; // Reset name for new game
-		// Start background music on mobile before changing scenes
-		if (!song.isPlaying()) {
-			song.play();
-		}
 		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 		return false;
@@ -296,14 +297,15 @@ function mousePressed() {
 	// Enable audio on mobile (required for browser autoplay policies)
 	userStartAudio();
 
+	// Start music on title screen after first interaction
+	if (currentScene === 18 && !song.isPlaying()) {
+		song.play();
+	}
+
 	// Handle title screen click - start game
 	if (currentScene === 18) {
 		// Click anywhere on title screen to start
 		newName = ""; // Reset name for new game
-		// Start background music on mobile before changing scenes
-		if (!song.isPlaying()) {
-			song.play();
-		}
 		currentScene = 0; // Always go to scene 0 to start the game
 		forward.play();
 		return false;

@@ -66,10 +66,10 @@ function preload() {
 	forward = loadSound("./Backwards.mp3");
 	backward = loadSound("./Forward.mp3");
 
-	// Set all audio to very low volume (10%)
-	song.setVolume(0.1);
-	forward.setVolume(0.1);
-	backward.setVolume(0.1);
+	// Set all audio to very low volume (5%)
+	song.setVolume(0.05);
+	forward.setVolume(0.05);
+	backward.setVolume(0.05);
 }
 
 function setup() {

@@ -109,17 +109,17 @@ function draw() {
 	isMusicPlaying();
 	isTextBoxVisible();
 	drawButtons();
-
-	// Auto-start music on page load (will work after first user interaction due to browser policies)
-	if (!musicStarted && !song.isPlaying()) {
-		song.loop();
-		musicStarted = true;
-	}
 }
 
 function keyPressed() {
 	// Enable audio on mobile (required for browser autoplay policies)
 	userStartAudio();
+
+	// Auto-start music on first interaction (mobile-friendly)
+	if (!musicStarted) {
+		song.loop();
+		musicStarted = true;
+	}
 
 	// Handle title screen - start game with key "1" (must come before general handler)
 	if (currentScene === 18 && key == "1") {

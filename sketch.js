@@ -1,14 +1,14 @@
 // Customize the p5.js loading screen with wavy text
-(function () {
-	const checkLoading = setInterval(function () {
-		const loadingScreen = document.getElementById("p5_loading");
+(function() {
+	const checkLoading = setInterval(function() {
+		const loadingScreen = document.getElementById('p5_loading');
 		if (loadingScreen) {
-			const text = "✨ Loading your adventure... 🐌 ✨";
+			const text = '✨ Loading your adventure... 🐌 ✨';
 			// Wrap each character in a span for individual wave animation
 			// Use spread operator to properly handle emojis (they're multi-byte)
-			loadingScreen.innerHTML = [...text]
-				.map((char) => `<span>${char === " " ? "&nbsp;" : char}</span>`)
-				.join("");
+			loadingScreen.innerHTML = [...text].map(char =>
+				`<span>${char === ' ' ? '&nbsp;' : char}</span>`
+			).join('');
 			clearInterval(checkLoading);
 		}
 	}, 10);
@@ -159,25 +159,13 @@ function isSketchActive() {
 	// If it isn't the title screen...then don't display the title screen. If it is...display the title screen and have no text box.
 	if (currentScene != 18) {
 		background(bg);
-		image(
-			scenes[currentScene].image,
-			100 * canvasScale,
-			30 * canvasScale,
-			330 * canvasScale,
-			411.5 * canvasScale,
-		);
+		image(scenes[currentScene].image, 100 * canvasScale, 30 * canvasScale, 330 * canvasScale, 411.5 * canvasScale);
 
 		push();
 		strokeWeight(8 * canvasScale);
 		stroke(224, 160, 80);
 		fill(20, 7, 36);
-		rect(
-			250 * canvasScale,
-			500 * canvasScale,
-			500 * canvasScale,
-			250 * canvasScale,
-			20 * canvasScale,
-		);
+		rect(250 * canvasScale, 500 * canvasScale, 500 * canvasScale, 250 * canvasScale, 20 * canvasScale);
 		pop();
 
 		// Draw text WITH the [1] and [2] markers so players see the numbers
@@ -188,13 +176,7 @@ function isSketchActive() {
 	} else if (currentScene == 18) {
 		push();
 		background(bg);
-		image(
-			scenes[currentScene].image,
-			0,
-			30 * canvasScale,
-			500 * canvasScale,
-			500 * canvasScale,
-		);
+		image(scenes[currentScene].image, 0, 30 * canvasScale, 500 * canvasScale, 500 * canvasScale);
 		fill(0);
 		text(scenes[currentScene].text, 150 * canvasScale, 525 * canvasScale);
 		pop();
@@ -237,9 +219,7 @@ function drawButtons() {
 		return;
 	}
 
-	const numChoices = scenes[currentScene].keys
-		? scenes[currentScene].keys.length
-		: 0;
+	const numChoices = scenes[currentScene].keys ? scenes[currentScene].keys.length : 0;
 	const buttonRadius = 18 * canvasScale;
 	const buttonGap = 50 * canvasScale;
 	const startX = (250 - (numChoices > 1 ? buttonGap / 2 : 0)) * canvasScale; // Center based on number of choices
@@ -283,12 +263,7 @@ function drawButtons() {
 		for (let px = -button.r; px <= button.r; px += button.pixelSize) {
 			for (let py = -button.r; py <= button.r; py += button.pixelSize) {
 				if (dist(0, 0, px, py) < button.r) {
-					rect(
-						button.x + px,
-						button.y + py,
-						button.pixelSize,
-						button.pixelSize,
-					);
+					rect(button.x + px, button.y + py, button.pixelSize, button.pixelSize);
 				}
 			}
 		}
@@ -306,7 +281,9 @@ function drawButtons() {
 
 function removeChoiceMarkers(fullText) {
 	// Remove [1], [2], etc. markers but keep the choice text
-	return fullText.replace(/\[\d+\]\s*/g, "").trim();
+	return fullText
+		.replace(/\[\d+\]\s*/g, "")
+		.trim();
 }
 
 function extractChoiceText(fullText, choiceIndex) {
